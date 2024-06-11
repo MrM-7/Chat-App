@@ -1,5 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
+import connectDB from "./db/index.js"
 
 const app = express()
 dotenv.config()
@@ -16,4 +17,12 @@ import authRoutes from "./routes/auth.routes.js"
 // routes declaration   
 app.use("/api/v1/auth", authRoutes)
 
-app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
+connectDB()
+.then(() => {
+    app.listen(PORT, () => {
+        console.log(`⚙️  Server is running at port : ${PORT}`);
+    })
+})
+.catch((err) => {
+    console.log("MONGO db connection failed !!! ", err);
+})
