@@ -7,9 +7,7 @@ dotenv.config()
 
 const PORT = process.env.PORT || 5000
 
-app.get("/", (req, res) => {
-    res.send("Home world!")
-})
+app.use(express.json())  // to parse incoming requests with json payload
 
 // routes import 
 import authRoutes from "./routes/auth.routes.js"
