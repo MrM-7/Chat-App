@@ -40,7 +40,7 @@ const signup = async (req, res) => {
 
         generateAccessToken(newUser._id, res)
 
-        const createdUser = await User.findById(newUser._id).select("-password")
+        const createdUser = await User.findById(newUser._id).select("-password -gender")
     
         return res
         .status(201)
@@ -51,12 +51,42 @@ const signup = async (req, res) => {
     }
 }
 
-const login = (req, res) => {
-    res.send("logged in")
+const login = async (req, res) => { 
+    try {
+        const { username, password } = req.body
+    
+        if(!username || !password){
+            return res.status(400).json({error: "All fields are required"})
+        }
+    
+        const user = await User.findOne({ username })
+        const result = await bcrypt.compare(password, user?.password || "")
+
+        if(!user || !result){
+            return res.status(400).json({error: "Invalid username or password"})
+        }
+    
+        generateAccessToken(user._id, res)
+
+        const signedInUser = await User.findById(user._id).select("-password -gender")
+    
+        return res
+        .status(200)
+        .json({data: signedInUser , success: "User logged in successfully"})
+    } catch (error) {
+        console.log("Error in login controller: ", error.message);
+        return res.status(500).json({error: "Internal serval error"})
+    }
 }
 
 const logout = (req, res) => {
-    res.send("logout")
+    try {
+        res.cookie("accessToken", "", { maxAge: 0, httpOnly: true })
+        res.status(200).json({success: "User logged out successfully"})
+    } catch (error) {
+        console.log("Error in logout controller: ", error.message);
+        return res.status(500).json({error: "Internal serval error"})
+    }
 }
 
 export {
