@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js"
 import bcrypt from "bcrypt"
+import generateAccessToken from "../utils/generateToken.js"
 
 const signup = async (req, res) => {
     try {
@@ -36,6 +37,8 @@ const signup = async (req, res) => {
         if(!newUser){
             return res.status(500).json({error: "Something went wrong while registering the user"})
         }
+
+        generateAccessToken(newUser._id, res)
 
         const createdUser = await User.findById(newUser._id).select("-password")
     
