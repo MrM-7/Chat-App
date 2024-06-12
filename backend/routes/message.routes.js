@@ -1,10 +1,14 @@
 import { Router } from "express";
-import { sendMessage } from "../controller/message.controller.js";
+import { getMessages, sendMessage } from "../controller/message.controller.js";
 import { verifyJWT } from "../middleware/auth.middleware.js";
 
 const router = Router()
 
 router.use(verifyJWT)
+
+router
+.route("/:id")
+.get(getMessages)
 
 router
 .route("/send/:id")
