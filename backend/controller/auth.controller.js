@@ -6,7 +6,7 @@ const signup = async (req, res) => {
     try {
         const { fullName, username, password, confirmPassword, gender } = req.body
 
-        if(password.trim().length < 6){
+        if(password.length < 6){
             return res.status(400).json({error: "Password length must be at least 6 characters"})
         }
     
