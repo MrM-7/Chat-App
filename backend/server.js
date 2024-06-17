@@ -2,8 +2,8 @@ import express from "express"
 import dotenv from "dotenv"
 import cookieParser from "cookie-parser"
 import connectDB from "./db/index.js"
+import { app, server } from "./socket/socket.js"
 
-const app = express()
 dotenv.config()
 
 const PORT = process.env.PORT || 5000
@@ -23,7 +23,7 @@ app.use("/api/v1/users", userRoutes)
 
 connectDB()
 .then(() => {
-    app.listen(PORT, () => {
+    server.listen(PORT, () => {
         console.log(`⚙️  Server is running at port : ${PORT}`);
     })
 })
