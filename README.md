@@ -4,14 +4,29 @@ A real-time chat application built with the MERN stack. The app includes user au
 
 ## Features
 
-- **Authentication & Authorization**: Secure login and registration using JWT.
-- **Real-time Messaging**: Instant messaging capabilities powered by Socket.io.
-- **Online User Status**: Track and display online users using Socket.io and React Context.
-- **Global State Management**: Manage application state with Zustand.
+- **🔒 Authentication & Authorization**: Secure login and registration using JWT.
+- **💬 Real-time Messaging**: Instant messaging capabilities powered by Socket.io.
+- **🟢 Online User Status**: Track and display online users using Socket.io and React Context.
+- **📦 Global State Management**: Manage application state with Zustand.
+- **🐞 Error Handling**: Comprehensive error handling on both the server and the client.
 
 ## Deployment
 
 Check out the live app [here](https://chat-app-tp09.onrender.com).
+
+## Screenshots
+
+### Login Page
+
+![Login Page](./screenshots/Login.png)
+
+### SignUp Page
+
+![Online User Status](./screenshots/Signup.png)
+
+### Chat Interface
+
+![Chat Interface](./screenshots/chat.png)
 
 ## Installation
 
